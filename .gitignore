@@ -1,0 +1,15 @@
+#Arquivos da IDE
+*.idea
+*.project
+
+
+#Arquivos de implementacao
+*.iml
+
+#Arquivos compilados
+*.class
+
+#Pasta de arquivos compilados
+target/
+target-eclipse/
+
