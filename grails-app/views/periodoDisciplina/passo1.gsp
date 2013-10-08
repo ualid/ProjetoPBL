@@ -25,6 +25,40 @@
         $("#hiddenAluno").val($(obj).val())
     }
     </g:javascript>
+    <script type="text/javascript">
+
+    $(function (){
+        $("#passo1").validate({
+            rules: {
+                'professorNome': {
+                    required: true
+                },
+                'disciplinaNome': {
+                    required: true
+                },
+                'sala': {
+                    required: true
+                },
+            },
+            messages: {
+                'professorNome': {
+                    required: "Escolha o professor."
+                },
+            
+                'disciplinaNome': {
+                    required: "Escolha a disciplina."
+                },
+            
+                'sala': {
+                    required: "Escolha a sala."
+                }
+            }
+        });
+     
+    });
+       
+   </script>
+   
 </head>
 <body>
 <div class="wrapper">
