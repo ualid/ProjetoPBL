@@ -1,6 +1,7 @@
 package sisap
 
 import br.edu.unime.util.Perfil
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class PeriodoDisciplinaController {
@@ -8,7 +9,8 @@ class PeriodoDisciplinaController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
-        redirect(action: "list", params: params)
+		
+		redirect(action: "list", params: params)
     }
 
     def list(Integer max) {
@@ -82,8 +84,8 @@ class PeriodoDisciplinaController {
         render(template: 'listDisciplina', model: [disciplinas: disciplinas, disciplinasTotal: disciplinasTotal])
     }
     def passo1(Integer max){
-
-        params.max = Math.min(max ?: 5, 100)
+		
+		params.max = Math.min(max ?: 5, 100)
         def professores = Pessoa.withCriteria(max: params.max, offset: params.offset) {
             maxResults(params.max)
             firstResult(params.offset ? params.offset.toInteger() : 0)
@@ -112,45 +114,49 @@ class PeriodoDisciplinaController {
 
     def passo2 = {
 
-
+		
 //        render(view: 'passo2')
         return
     }
 
     def create() {
-        [periodoDisciplinaInstance: new PeriodoDisciplina(params)]
+		
+		[periodoDisciplinaInstance: new PeriodoDisciplina(params)]
     }
 
     def save() {
-
-        params['ano'] = params.periodo.toString().split("\\.")[0]
+			
+		params['ano'] = params.periodo.toString().split("\\.")[0]
         params['semestre'] = params.periodo.toString().split("\\.")[1]
 
-
+		
         def periodoDisciplinaInstance = new PeriodoDisciplina()
-
+		
         def listId = []
         params.alunos.each {listId << Integer.parseInt(it)}
         def alunos =  Pessoa.findAllByIdInList(listId)
-
+	
         alunos.each {
             it.addToDisciplinas(periodoDisciplinaInstance)
         }
-
+		
+		
+		
+		
         periodoDisciplinaInstance.disciplina = Disciplina.read(params.disciplina)
         periodoDisciplinaInstance.professor = Pessoa.read(params.professor)
         periodoDisciplinaInstance.ano = Integer.parseInt(params.ano)
         periodoDisciplinaInstance.sala = Integer.parseInt(params.sala)
         periodoDisciplinaInstance.semestre = Integer.parseInt(params.semestre)
 
-
+		
 
         periodoDisciplinaInstance.alunos = alunos
-
+		
 
         PeriodoDisciplina.withTransaction {
             if (!periodoDisciplinaInstance.save(flush: true)) {
-
+			
                 println periodoDisciplinaInstance.errors
                 render(view: "passo1", model: [periodoDisciplinaInstance: periodoDisciplinaInstance])
                 return
@@ -164,7 +170,7 @@ class PeriodoDisciplinaController {
         }
 
 
-
+		
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'periodoDisciplina.label', default: 'PeriodoDisciplina'), periodoDisciplinaInstance.id])
         redirect(action: "show", id: periodoDisciplinaInstance.id)

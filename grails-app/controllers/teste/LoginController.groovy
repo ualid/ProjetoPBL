@@ -5,8 +5,7 @@ import sisap.Pessoa
 import sisap.Usuario
 
 class LoginController {
-
-    def index() {
+	def index() {
         if (session.auth){
             render(view: '/index')
             return
@@ -43,7 +42,8 @@ class LoginController {
 
             render(view: '/index')
         }  else{
-            flash.message= "Usuário ou senha inválidos"
+            
+			flash.message= "Usuário ou senha inválidos"
             render(view: 'loginPage')
         }
     }
