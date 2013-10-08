@@ -5,12 +5,14 @@
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'periodoDisciplina.label', default: 'PeriodoDisciplina')}" />
     <title><g:message code="default.create.label" args="[entityName]" /></title>
-    <g:javascript>
+    <g:javascript >
+     
+    
     function pesquisa(){
         var matriculaValue = $("#matricula").val();
         var nomeValue = $("#nome").val();
         var emailValue = $("#email").val();
-        ${remoteFunction(action: 'ajaxPesquisa', update: "tabelaProfessores", params: "'matricula=' + matriculaValue + '&nome=' + nomeValue + '&email=' + emailValue")}
+         ${remoteFunction(action: 'ajaxPesquisa', update: "tabelaProfessores", params: "'matricula=' + matriculaValue + '&nome=' + nomeValue + '&email=' + emailValue")}
     }
     function professorAttr(obj){
         $("#hiddenProfessorNome").val($("#tdNomeProfessor"+$(obj).val()).text());
@@ -57,7 +59,14 @@
      
     });
        
-   </script>
+  
+    	
+        
+         
+         
+    </script>
+   
+    
    
 </head>
 <body>
@@ -65,27 +74,16 @@
 <div class="content">
 <div class="title"><h5>Cadastrar Disciplina em Período</h5></div>
 
-    <g:form id="nextPasso2" name="nextPasso2" action="save" class="mainForm" onsubmit="\$('#box2View').find('option').attr('selected',true);)">
+    <g:form id="passo1" name="passo1" action="save" method="" class="mainForm" onsubmit="\$('#box2View').find('option').attr('selected',true);)">
+   
     <fieldset class="form" >
         <div class="widget first">
             <div class="head"><h5 class="iList">Período</h5></div>
-             %{--<div class="rowElem"><label>Período:</label>--}%
-                        %{--<div class="formRight">--}%
-                            %{--<ul id="s4">--}%
-                                %{--<g:each in="${((Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()))).. (Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()))+1) )}" var="ano">--}%
-                                    %{--<g:each in="${[1,2]}" var="semestre">--}%
-                                        %{--<li id="${ano}.${semestre}">${ano}.${semestre}</li>--}%
-                                    %{--</g:each>--}%
-                                %{--</g:each>--}%
-                            %{--</ul>--}%
-                        %{--</div>--}%
-                        %{--<div class="fix"></div>--}%
-                    %{--</div>--}%
+            
         <div class="rowElem">
             <label>Período:</label>
             <div class="formRight searchDrop">
-                %{--<g:select name="curso.id" noSelection="${[null:'Selecione um Curso']}" from="${(1..9)}" optionValue="value" class="chzn-select" style="width:350px;" data-placeholder="Selecione um Curso..." />--}%
-               <select class="chzn-select" style="width:350px;" data-placeholder="Selecione um Período..." name="periodo" >
+                <select class="chzn-select" style="width:350px;" data-placeholder="Selecione um Período..." name="periodo" >
                 <g:each in="${((Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()))).. (Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()))+1) )}" var="ano">
                     <g:each in="${[1,2]}" var="semestre">
                         <option value="${ano}.${semestre}">${ano}.${semestre}</option>
@@ -107,21 +105,13 @@
             </div>
         </div><div class="fix"></div></div>
 
-            %{--<div class="rowElem"><label for="semestre">--}%
-                %{--<g:message code="periodoDisciplina.semestre.label" default="Semestre" />--}%
-
-            %{--</label><div class="formRight">--}%
-                %{--<div class="fieldcontain ${hasErrors(bean: periodoDisciplinaInstance, field: 'semestre', 'error')} ">--}%
-
-                    %{--<g:textField name="semestre" value="${periodoDisciplinaInstance?.semestre}"/>--}%
-                %{--</div>--}%
-            %{--</div><div class="fix"></div></div>--}%
+           
         <div class="rowElem"><label for="semestre">
                 Professor
             </label><div class="formRight">
                 <div class="fieldcontain ${hasErrors(bean: periodoDisciplinaInstance, field: 'professor', 'error')} ">
 
-                    %{--<g:textField name="professorNome" value="${periodoDisciplinaInstance?.semestre}"/>--}%
+                   
                     <div id="divProfessor">
                         <g:textField name="professorNome" id="professorNome" readonly="readonly" />
                         <a href="#" id="teste" onclick="${remoteFunction(action: 'ajaxPesquisaProfessor', update: 'professorDialog')};$('#professorDialog').dialog({'minWidth': '750', 'position': 'center top'});"><img src="${createLinkTo(dir: 'images/icons/dark', file: 'add.png')}"></a>
@@ -136,7 +126,7 @@
         </label><div class="formRight">
             <div class="fieldcontain ${hasErrors(bean: periodoDisciplinaInstance, field: 'disciplina', 'error')} ">
 
-                %{--<g:textField name="professorNome" value="${periodoDisciplinaInstance?.semestre}"/>--}%
+              
                 <div id="divDisciplina">
                     <g:textField name="disciplinaNome" id="disciplinaNome" readonly="readonly" />
                     <a href="#" id="teste" onclick="${remoteFunction(action: 'ajaxPesquisaDisciplina', update: 'disciplinaDialog')};$('#disciplinaDialog').dialog({'minWidth': '750', 'position': 'center top'});"><img src="${createLinkTo(dir: 'images/icons/dark', file: 'add.png')}"></a>
@@ -185,14 +175,14 @@
                         </div>
 					<div class="fix"></div>
 
-    </g:form>
+   
     <div class="fix"></div>
-    <div class="rowElem"><button class="greyishBtn" onclick="$('form#nextPasso2').submit();">Prosseguir</button></div>
+    <div class="rowElem"><button class="greyishBtn" onclick="$('form#passo1').submit();">Prosseguir</button></div>
 
         </div>
     </fieldset>
 
-
+ </g:form>
 
 </div>
 <div class="fix"></div>

@@ -6,6 +6,7 @@
     <g:set var="entityName" value="${message(code: 'periodoDisciplina.label', default: 'PeriodoDisciplina')}" />
     <title><g:message code="default.create.label" args="[entityName]" /></title>
     <g:javascript>
+  
     function pesquisa(){
         var matriculaValue = $("#matricula").val();
         var nomeValue = $("#nome").val();
