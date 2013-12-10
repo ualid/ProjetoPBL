@@ -63,8 +63,8 @@ class AtividadeController {
         if (version != null) {
             if (atividadeInstance.version > version) {
                 atividadeInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'atividade.label', default: 'Atividade')] as Object[],
-                        "Another user has updated this Atividade while you were editing")
+                          [message(code: 'atividade.label', default: 'Atividade')] as Object[],
+                          "Another user has updated this Atividade while you were editing")
                 render(view: "edit", model: [atividadeInstance: atividadeInstance])
                 return
             }

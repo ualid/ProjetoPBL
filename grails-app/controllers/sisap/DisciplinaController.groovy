@@ -1,43 +1,18 @@
 package sisap
 
-
 import org.springframework.dao.DataIntegrityViolationException
 
 class DisciplinaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-    def crudClientService
-    def mensagemService
+
     def index() {
-
-
         redirect(action: "list", params: params)
     }
 
     def list(Integer max) {
-
         params.max = Math.min(max ?: 10, 100)
-        def disciplinaInstanceList = Disciplina.withCriteria() {
-            maxResults(params.max)
-            firstResult(params.offset ? params.offset.toInteger() : 0)
-            if (params.nome){
-                ilike('nome', "%$params.nome%")
-            }
-            if (params.codigo){
-                ilike('codigo', "%$params.codigo%")
-            }
-        }
-        def disciplinaInstanceTotal = Disciplina.createCriteria().count(){
-            if (params.nome){
-                ilike('nome', "%$params.nome%")
-            }
-            if (params.codigo){
-                ilike('codigo', "%$params.codigo%")
-            }
-        }
-
-
-        [disciplinaInstanceList: disciplinaInstanceList, disciplinaInstanceTotal: disciplinaInstanceTotal]
+        [disciplinaInstanceList: Disciplina.list(params), disciplinaInstanceTotal: Disciplina.count()]
     }
 
     def create() {
@@ -45,10 +20,7 @@ class DisciplinaController {
     }
 
     def save() {
-
-
         def disciplinaInstance = new Disciplina(params)
-
         if (!disciplinaInstance.save(flush: true)) {
             render(view: "create", model: [disciplinaInstance: disciplinaInstance])
             return
@@ -91,8 +63,8 @@ class DisciplinaController {
         if (version != null) {
             if (disciplinaInstance.version > version) {
                 disciplinaInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'disciplina.label', default: 'Disciplina')] as Object[],
-                        "Another user has updated this Disciplina while you were editing")
+                          [message(code: 'disciplina.label', default: 'Disciplina')] as Object[],
+                          "Another user has updated this Disciplina while you were editing")
                 render(view: "edit", model: [disciplinaInstance: disciplinaInstance])
                 return
             }

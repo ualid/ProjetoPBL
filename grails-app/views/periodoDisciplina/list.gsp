@@ -27,49 +27,59 @@
                     </div>
                 </div>
 			</g:if>
-
         <div class="fix"></div>
         <div class="table">
             <div class="head"><h5 class="iFrames">Listagem de <g:message code="default.list.label" args="[entityName]" />: ${periodoDisciplinaInstanceTotal}</h5></div>
-			<table cellpadding="0" cellspacing="0" width="100%" class="tableStatic resize">
+            <g:form name="formShow" method="POST"  action="delete">
+                <g:hiddenField id="id" name="id" value=""/>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tableStatic resize">
 				<thead>
 					<tr>
 					
-                        <td width="50%">${message(code: 'periodoDisciplina.disciplina.label', default: 'Disciplina')}</td>
+                        <td>${message(code: 'periodoDisciplina.ano.label', default: 'Ano')}</td>
 					
-						<td><g:message code="periodoDisciplina.periodo.label" default="Período" /></td>
-
-
+						<td><g:message code="periodoDisciplina.disciplina.label" default="Disciplina" /></td>
+					
 						<td><g:message code="periodoDisciplina.professor.label" default="Professor" /></td>
 					
-
+                        <td>${message(code: 'periodoDisciplina.sala.label', default: 'Sala')}</td>
+					
+                        <td>${message(code: 'periodoDisciplina.semestre.label', default: 'Semestre')}</td>
+					
+                        <th width="10%">Editar</th>
+                        <th width="10%">Excluir</th>
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${periodoDisciplinaInstanceList}" status="i" var="periodoDisciplinaInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td width="50%"><g:link action="show" id="${periodoDisciplinaInstance.id}">
-                            ${periodoDisciplinaInstance.disciplina.toString()} - ${periodoDisciplinaInstance.periodo}
-                        </g:link></td>
-
-                        <td>${periodoDisciplinaInstance.periodo}</td>
-
-
+						<td><g:link action="show" id="${periodoDisciplinaInstance.id}">${fieldValue(bean: periodoDisciplinaInstance, field: "ano")}</g:link></td>
+					
+						<td>${fieldValue(bean: periodoDisciplinaInstance, field: "disciplina")}</td>
+					
 						<td>${fieldValue(bean: periodoDisciplinaInstance, field: "professor")}</td>
 					
-
+						<td>${fieldValue(bean: periodoDisciplinaInstance, field: "sala")}</td>
+					
+						<td>${fieldValue(bean: periodoDisciplinaInstance, field: "semestre")}</td>
+					
+                        <td align="center"><g:link action="edit" id="${periodoDisciplinaInstance.id}"><img src="${createLinkTo(dir: 'images/icons/middlenav', file: 'pencil.png')}" style="width: 15px;height: 15px;" /></g:link></td>
+                        <td align="center"><div id="auxDiv${periodoDisciplinaInstance.id}"></div><a href="#auxDiv${periodoDisciplinaInstance.id}" onclick="jConfirm('Tem certeza que deseja excluir este(a) ${message(code: 'periodoDisciplina.label', default: 'Artefact > PeriodoDisciplina')}?', 'Confirmação', function(e){if(e){
+                        $('#id').val('${periodoDisciplinaInstance.id}');$('form#formShow').submit();
+                        $('#id').val('')}});"><img src="${createLinkTo(dir: 'images/icons/middlenav', file: 'trash.png')}" style="width: 15px;height: 15px;" /></a></td>
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
+                </g:form>
             </div>
         <div class="pagination">
             <ul class="pages">
                 <g:paginateCustom total="${periodoDisciplinaInstanceTotal}" />
             </ul>
         </div>
-        <g:link action="passo1" style="float: right;"><button class="greyishBtn">Adicionar</button></g:link>
+        <g:link style="float: right;" action="create" ><button class="greyishBtn">Adicionar</button></g:link>
 
 		</div>
     <div class="fix"></div>

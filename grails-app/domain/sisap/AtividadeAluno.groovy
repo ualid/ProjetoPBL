@@ -1,7 +1,7 @@
 package sisap
 
 class AtividadeAluno {
-    static mapWith="mongo"
+   // static mapWith="mongo"
 
     Pessoa aluno
     Float nota

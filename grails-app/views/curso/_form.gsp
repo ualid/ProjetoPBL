@@ -35,3 +35,23 @@
 </div><div class="fix"></div></div>
 
 
+<div class="rowElem"><label for="alunos">
+    <g:message code="curso.alunos.label" default="Alunos" />
+    
+</label><div class="formRight">
+    <div class="fieldcontain ${hasErrors(bean: cursoInstance, field: 'alunos', 'error')} ">
+
+        
+<ul class="one-to-many">
+<g:each in="${cursoInstance?.alunos?}" var="a">
+    <li><g:link controller="pessoa" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="pessoa" action="create" params="['curso.id': cursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'pessoa.label', default: 'Pessoa')])}</g:link>
+</li>
+</ul>
+
+    </div>
+</div><div class="fix"></div></div>
+
+

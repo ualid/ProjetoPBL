@@ -1,7 +1,7 @@
 package sisap
 
 class AtividadePeriodo {
-    static mapWith="mongo"
+ //   static mapWith="mongo"
 
     Date dataCriacao
     Date dataPrazo

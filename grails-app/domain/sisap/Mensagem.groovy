@@ -2,7 +2,7 @@ package sisap
 
 class Mensagem {
 
-    static mapWith="mongo"
+   // static mapWith="mongo"
 
     Pessoa remetente
     String titulo

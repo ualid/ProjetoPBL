@@ -66,20 +66,20 @@
                             </div><div class="fix"></div></div>
                     </g:if>
                     
-                    <g:if test="${disciplinaInstance?.descricao}">
-                        <div class="rowElem"><label><span id="descricao-label" class="property-label"><g:message code="disciplina.descricao.label" default="Descricao" /></span>:</label>
-                            <div class="formRight">
-                                
-                                <span class="property-value" aria-labelledby="descricao-label"><g:textField readonly="readonly" name="${disciplinaInstance}" value="${disciplinaInstance.descricao}" /></span>
-                                
-                            </div><div class="fix"></div></div>
-                    </g:if>
-                    
                     <g:if test="${disciplinaInstance?.nome}">
                         <div class="rowElem"><label><span id="nome-label" class="property-label"><g:message code="disciplina.nome.label" default="Nome" /></span>:</label>
                             <div class="formRight">
                                 
                                 <span class="property-value" aria-labelledby="nome-label"><g:textField readonly="readonly" name="${disciplinaInstance}" value="${disciplinaInstance.nome}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${disciplinaInstance?.descricao}">
+                        <div class="rowElem"><label><span id="descricao-label" class="property-label"><g:message code="disciplina.descricao.label" default="Descricao" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="descricao-label"><g:textField readonly="readonly" name="${disciplinaInstance}" value="${disciplinaInstance.descricao}" /></span>
                                 
                             </div><div class="fix"></div></div>
                     </g:if>

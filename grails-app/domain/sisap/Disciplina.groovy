@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement
 @XmlAccessorType(XmlAccessType.NONE)
 class Disciplina {
 
-    static mapWith="mongo"
+   // static mapWith="mongo"
 
     @XmlElement(name = "codigo")
     String codigo
@@ -18,6 +18,10 @@ class Disciplina {
     @XmlElement(name = "descricao")
     String descricao
 
+
+//	static hasMany = [turma:Turma]
+//	static belongsTo = [turma:TurmaDisciplina, atividade:Atividade]
+	
     static constraints = {
         codigo(blank: false, unique: true)
         nome(blank: false, unique: true)

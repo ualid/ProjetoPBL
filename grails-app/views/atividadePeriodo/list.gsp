@@ -27,18 +27,12 @@
                     </div>
                 </div>
 			</g:if>
-        <div class="middleNav">
-            <ul>
-                <li class="iPlus"><g:link action="create"><span>Adicionar ${message(code: 'atividadePeriodo.label', default: 'AtividadePeriodo')}</span></g:link> </li>
-                %{--<li class="iStat"><a href="#" title=""><span>Buscar usuário</span></a></li>--}%
-                %{--<li class="iUser"><a href="#" title=""><span>User list</span></a></li>--}%
-                %{--<li class="iOrders"><a href="#" title=""><span>Billing panel</span></a></li>--}%
-            </ul>
-        </div>
         <div class="fix"></div>
         <div class="table">
             <div class="head"><h5 class="iFrames">Listagem de <g:message code="default.list.label" args="[entityName]" />: ${atividadePeriodoInstanceTotal}</h5></div>
-			<table cellpadding="0" cellspacing="0" width="100%" class="tableStatic resize">
+            <g:form name="formShow" method="POST"  action="delete">
+                <g:hiddenField id="id" name="id" value=""/>
+            <table cellpadding="0" cellspacing="0" width="100%" class="tableStatic resize">
 				<thead>
 					<tr>
 					
@@ -48,8 +42,10 @@
 					
                         <td>${message(code: 'atividadePeriodo.dataPrazo.label', default: 'Data Prazo')}</td>
 					
-                        <td>${message(code: 'atividadePeriodo.periodo.label', default: 'Periodo')}</td>
+						<td><g:message code="atividadePeriodo.periodoDisciplina.label" default="Periodo Disciplina" /></td>
 					
+                        <th width="10%">Editar</th>
+                        <th width="10%">Excluir</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -62,18 +58,24 @@
 					
 						<td><g:formatDate date="${atividadePeriodoInstance.dataPrazo}" /></td>
 					
-						<td>${fieldValue(bean: atividadePeriodoInstance, field: "periodo")}</td>
+						<td>${fieldValue(bean: atividadePeriodoInstance, field: "periodoDisciplina")}</td>
 					
+                        <td align="center"><g:link action="edit" id="${atividadePeriodoInstance.id}"><img src="${createLinkTo(dir: 'images/icons/middlenav', file: 'pencil.png')}" style="width: 15px;height: 15px;" /></g:link></td>
+                        <td align="center"><div id="auxDiv${atividadePeriodoInstance.id}"></div><a href="#auxDiv${atividadePeriodoInstance.id}" onclick="jConfirm('Tem certeza que deseja excluir este(a) ${message(code: 'atividadePeriodo.label', default: 'Artefact > AtividadePeriodo')}?', 'Confirmação', function(e){if(e){
+                        $('#id').val('${atividadePeriodoInstance.id}');$('form#formShow').submit();
+                        $('#id').val('')}});"><img src="${createLinkTo(dir: 'images/icons/middlenav', file: 'trash.png')}" style="width: 15px;height: 15px;" /></a></td>
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
+                </g:form>
             </div>
         <div class="pagination">
             <ul class="pages">
                 <g:paginateCustom total="${atividadePeriodoInstanceTotal}" />
             </ul>
         </div>
+        <g:link style="float: right;" action="create" ><button class="greyishBtn">Adicionar</button></g:link>
 
 		</div>
     <div class="fix"></div>

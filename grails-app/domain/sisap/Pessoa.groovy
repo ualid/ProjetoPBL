@@ -2,7 +2,7 @@ package sisap
 import br.edu.unime.util.Perfil
 
 class Pessoa {
-    static mapWith="mongo"
+   // static mapWith="mongo"
 
     String nome
     String matricula

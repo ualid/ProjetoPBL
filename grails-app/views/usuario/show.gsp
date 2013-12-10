@@ -43,11 +43,11 @@
             </div>
         </g:if>
         <div class="middleNav">
-            <g:form method="POST" >
-                <g:hiddenField name="id" value="${usuarioInstance}" />
+            <g:form name="formShow" method="POST"  action="delete">
+                <g:hiddenField name="id" value="${usuarioInstance.id}" />
                 <ul>
                     <li class="iEdit"><g:link id="${usuarioInstance.id}" action="edit"><span><g:message code="default.edit.label" args="[entityName]" /></span></g:link> </li>
-                    <li class="iDelete"><g:link  onclick="if(!(jConfirm('Tem certeza que deseja excluir este(a) ${message(code: 'usuario.label', default: 'Usuario')}?', 'Confirmação')))return false;"><span><g:message code="default.button.delete.label" args="[entityName]" /></span></g:link></li>
+                    <li class="iDelete"><a href="#" onclick="jConfirm('Tem certeza que deseja excluir este(a) ${message(code: 'usuario.label', default: 'Usuario')}?', 'Confirmação', function(e){if(e){$('form#formShow').submit();}});"><span><g:message code="default.button.delete.label" args="[entityName]" /></span></a></li>
                 </ul>
             </g:form>
         </div>
@@ -71,6 +71,16 @@
                             <div class="formRight">
                                 
                                 <span class="property-value" aria-labelledby="senha-label"><g:textField readonly="readonly" name="${usuarioInstance}" value="${usuarioInstance.senha}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${usuarioInstance?.pessoa}">
+                        <div class="rowElem"><label><span id="pessoa-label" class="property-label"><g:message code="usuario.pessoa.label" default="Pessoa" /></span>:</label>
+                            <div class="formRight">
+                                
+
+                                <span class="property-value" aria-labelledby="pessoa-label"><g:link controller="pessoa" action="show" id="${usuarioInstance?.pessoa?.id}">${usuarioInstance?.pessoa?.encodeAsHTML()}</g:link></span>
                                 
                             </div><div class="fix"></div></div>
                     </g:if>

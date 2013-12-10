@@ -2,6 +2,28 @@
 
 
 
+<div class="rowElem"><label for="nota">
+    <g:message code="atividadeAluno.nota.label" default="Nota" />
+    
+</label><div class="formRight">
+    <div class="fieldcontain ${hasErrors(bean: atividadeAlunoInstance, field: 'nota', 'error')} ">
+
+        <g:field name="nota" value="${fieldValue(bean: atividadeAlunoInstance, field: 'nota')}"/>
+    </div>
+</div><div class="fix"></div></div>
+
+
+<div class="rowElem"><label for="dataEntrega">
+    <g:message code="atividadeAluno.dataEntrega.label" default="Data Entrega" />
+    
+</label><div class="formRight">
+    <div class="fieldcontain ${hasErrors(bean: atividadeAlunoInstance, field: 'dataEntrega', 'error')} ">
+
+        <g:datePicker name="dataEntrega" precision="day"  value="${atividadeAlunoInstance?.dataEntrega}" default="none" noSelection="['': '']" />
+    </div>
+</div><div class="fix"></div></div>
+
+
 <div class="rowElem"><label for="aluno">
     <g:message code="atividadeAluno.aluno.label" default="Aluno" />
     <span class="required-indicator">*</span>
@@ -20,28 +42,6 @@
     <div class="fieldcontain ${hasErrors(bean: atividadeAlunoInstance, field: 'atividadePeriodo', 'error')} required">
 
         <g:select id="atividadePeriodo" name="atividadePeriodo.id" from="${sisap.AtividadePeriodo.list()}" optionKey="id" required="" value="${atividadeAlunoInstance?.atividadePeriodo?.id}" class="many-to-one"/>
-    </div>
-</div><div class="fix"></div></div>
-
-
-<div class="rowElem"><label for="dataEntrega">
-    <g:message code="atividadeAluno.dataEntrega.label" default="Data Entrega" />
-    <span class="required-indicator">*</span>
-</label><div class="formRight">
-    <div class="fieldcontain ${hasErrors(bean: atividadeAlunoInstance, field: 'dataEntrega', 'error')} required">
-
-        <g:datePicker name="dataEntrega" precision="day"  value="${atividadeAlunoInstance?.dataEntrega}"  />
-    </div>
-</div><div class="fix"></div></div>
-
-
-<div class="rowElem"><label for="nota">
-    <g:message code="atividadeAluno.nota.label" default="Nota" />
-    <span class="required-indicator">*</span>
-</label><div class="formRight">
-    <div class="fieldcontain ${hasErrors(bean: atividadeAlunoInstance, field: 'nota', 'error')} required">
-
-        <g:field name="nota" value="${fieldValue(bean: atividadeAlunoInstance, field: 'nota')}" required=""/>
     </div>
 </div><div class="fix"></div></div>
 

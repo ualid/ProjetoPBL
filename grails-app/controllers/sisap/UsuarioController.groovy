@@ -9,9 +9,6 @@ class UsuarioController {
     def index() {
         redirect(action: "list", params: params)
     }
-    def teste(){
-        render(view:  'index')
-    }
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -85,7 +82,6 @@ class UsuarioController {
     }
 
     def delete(Long id) {
-        println params
         def usuarioInstance = Usuario.get(id)
         if (!usuarioInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'usuario.label', default: 'Usuario'), id])

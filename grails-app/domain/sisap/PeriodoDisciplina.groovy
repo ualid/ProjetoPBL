@@ -1,7 +1,7 @@
 package sisap
 
 class PeriodoDisciplina {
-    static mapWith="mongo"
+   // static mapWith="mongo"
 
     Integer ano
     Integer semestre

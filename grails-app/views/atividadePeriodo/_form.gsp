@@ -2,17 +2,6 @@
 
 
 
-<div class="rowElem"><label for="atividade">
-    <g:message code="atividadePeriodo.atividade.label" default="Atividade" />
-    <span class="required-indicator">*</span>
-</label><div class="formRight">
-    <div class="fieldcontain ${hasErrors(bean: atividadePeriodoInstance, field: 'atividade', 'error')} required">
-
-        <g:select id="atividade" name="atividade.id" from="${sisap.Atividade.list()}" optionKey="id" required="" value="${atividadePeriodoInstance?.atividade?.id}" class="many-to-one"/>
-    </div>
-</div><div class="fix"></div></div>
-
-
 <div class="rowElem"><label for="atividadesAluno">
     <g:message code="atividadePeriodo.atividadesAluno.label" default="Atividades Aluno" />
     
@@ -29,6 +18,17 @@
 </li>
 </ul>
 
+    </div>
+</div><div class="fix"></div></div>
+
+
+<div class="rowElem"><label for="atividade">
+    <g:message code="atividadePeriodo.atividade.label" default="Atividade" />
+    <span class="required-indicator">*</span>
+</label><div class="formRight">
+    <div class="fieldcontain ${hasErrors(bean: atividadePeriodoInstance, field: 'atividade', 'error')} required">
+
+        <g:select id="atividade" name="atividade.id" from="${sisap.Atividade.list()}" optionKey="id" required="" value="${atividadePeriodoInstance?.atividade?.id}" class="many-to-one"/>
     </div>
 </div><div class="fix"></div></div>
 
@@ -55,13 +55,13 @@
 </div><div class="fix"></div></div>
 
 
-<div class="rowElem"><label for="periodo">
-    <g:message code="atividadePeriodo.periodo.label" default="Periodo" />
-    
+<div class="rowElem"><label for="periodoDisciplina">
+    <g:message code="atividadePeriodo.periodoDisciplina.label" default="Periodo Disciplina" />
+    <span class="required-indicator">*</span>
 </label><div class="formRight">
-    <div class="fieldcontain ${hasErrors(bean: atividadePeriodoInstance, field: 'periodo', 'error')} ">
+    <div class="fieldcontain ${hasErrors(bean: atividadePeriodoInstance, field: 'periodoDisciplina', 'error')} required">
 
-        <g:textField name="periodo" value="${atividadePeriodoInstance?.periodo}"/>
+        <g:select id="periodoDisciplina" name="periodoDisciplina.id" from="${sisap.PeriodoDisciplina.list()}" optionKey="id" required="" value="${atividadePeriodoInstance?.periodoDisciplina?.id}" class="many-to-one"/>
     </div>
 </div><div class="fix"></div></div>
 

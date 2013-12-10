@@ -12,26 +12,7 @@ class PessoaController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        println params
-        def pessoaInstanceList = Pessoa.withCriteria(max: params.max, offset: params.offset) {
-             maxResults(params.max)
-            firstResult(params.offset ? params.offset.toInteger() : 0)
-            if (params.nome){
-                ilike('nome', "%$params.nome%")
-            }
-            if (params.matricula){
-                ilike('matricula', "%$params.matricula%")
-            }
-        }
-        def pessoaInstanceTotal = Pessoa.createCriteria().count(){
-            if (params.nome){
-                ilike('nome', "%$params.nome%")
-            }
-            if (params.matricula){
-                ilike('matricula', "%$params.matricula%")
-            }
-        }
-        [pessoaInstanceList: pessoaInstanceList, pessoaInstanceTotal: pessoaInstanceTotal]
+        [pessoaInstanceList: Pessoa.list(params), pessoaInstanceTotal: Pessoa.count()]
     }
 
     def create() {
@@ -40,9 +21,6 @@ class PessoaController {
 
     def save() {
         def pessoaInstance = new Pessoa(params)
-
-
-
         if (!pessoaInstance.save(flush: true)) {
             render(view: "create", model: [pessoaInstance: pessoaInstance])
             return
@@ -54,8 +32,6 @@ class PessoaController {
 
     def show(Long id) {
         def pessoaInstance = Pessoa.get(id)
-
-
         if (!pessoaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'pessoa.label', default: 'Pessoa'), id])
             redirect(action: "list")
@@ -87,8 +63,8 @@ class PessoaController {
         if (version != null) {
             if (pessoaInstance.version > version) {
                 pessoaInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'pessoa.label', default: 'Pessoa')] as Object[],
-                        "Another user has updated this Pessoa while you were editing")
+                          [message(code: 'pessoa.label', default: 'Pessoa')] as Object[],
+                          "Another user has updated this Pessoa while you were editing")
                 render(view: "edit", model: [pessoaInstance: pessoaInstance])
                 return
             }
@@ -106,7 +82,6 @@ class PessoaController {
     }
 
     def delete(Long id) {
-        println params
         def pessoaInstance = Pessoa.get(id)
         if (!pessoaInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'pessoa.label', default: 'Pessoa'), id])

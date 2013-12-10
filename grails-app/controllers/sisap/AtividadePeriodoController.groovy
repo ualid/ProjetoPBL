@@ -63,8 +63,8 @@ class AtividadePeriodoController {
         if (version != null) {
             if (atividadePeriodoInstance.version > version) {
                 atividadePeriodoInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'atividadePeriodo.label', default: 'AtividadePeriodo')] as Object[],
-                        "Another user has updated this AtividadePeriodo while you were editing")
+                          [message(code: 'atividadePeriodo.label', default: 'AtividadePeriodo')] as Object[],
+                          "Another user has updated this AtividadePeriodo while you were editing")
                 render(view: "edit", model: [atividadePeriodoInstance: atividadePeriodoInstance])
                 return
             }

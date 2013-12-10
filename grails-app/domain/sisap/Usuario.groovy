@@ -1,13 +1,13 @@
 package sisap
 
 class Usuario {
-    static mapWith="mongo"
+    //static mapWith="mongo"
 
     String login
     String senha
     Pessoa pessoa
 
-    static hasOne = [pessoa: Pessoa]
+   // static hasOne = [pessoa: Pessoa]
 
     static constraints = {
         login(nullable: false, blank: false)
@@ -21,6 +21,7 @@ class Usuario {
     static mapping = {
         version false
     }
+	
     String toString(){
         return login
     }

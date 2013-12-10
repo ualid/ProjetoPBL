@@ -43,11 +43,11 @@
             </div>
         </g:if>
         <div class="middleNav">
-            <g:form method="POST" >
-                <g:hiddenField name="id" value="${atividadeAlunoInstance}" />
+            <g:form name="formShow" method="POST"  action="delete">
+                <g:hiddenField name="id" value="${atividadeAlunoInstance.id}" />
                 <ul>
                     <li class="iEdit"><g:link id="${atividadeAlunoInstance.id}" action="edit"><span><g:message code="default.edit.label" args="[entityName]" /></span></g:link> </li>
-                    <li class="iDelete"><g:link  onclick="if(!(jConfirm('Tem certeza que deseja excluir este(a) ${message(code: 'atividadeAluno.label', default: 'AtividadeAluno')}?', 'Confirmação')))return false;"><span><g:message code="default.button.delete.label" args="[entityName]" /></span></g:link></li>
+                    <li class="iDelete"><a href="#" onclick="jConfirm('Tem certeza que deseja excluir este(a) ${message(code: 'atividadeAluno.label', default: 'AtividadeAluno')}?', 'Confirmação', function(e){if(e){$('form#formShow').submit();}});"><span><g:message code="default.button.delete.label" args="[entityName]" /></span></a></li>
                 </ul>
             </g:form>
         </div>
@@ -56,6 +56,24 @@
             <fieldset>
                 <div class="widget first">
                     <div class="head"><h5 class="iList">Dados do teste</h5></div>
+                    
+                    <g:if test="${atividadeAlunoInstance?.nota}">
+                        <div class="rowElem"><label><span id="nota-label" class="property-label"><g:message code="atividadeAluno.nota.label" default="Nota" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="nota-label"><g:textField readonly="readonly" name="${atividadeAlunoInstance}" value="${atividadeAlunoInstance.nota}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${atividadeAlunoInstance?.dataEntrega}">
+                        <div class="rowElem"><label><span id="dataEntrega-label" class="property-label"><g:message code="atividadeAluno.dataEntrega.label" default="Data Entrega" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="dataEntrega-label"><g:formatDate date="${atividadeAlunoInstance?.dataEntrega}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
                     
                     <g:if test="${atividadeAlunoInstance?.aluno}">
                         <div class="rowElem"><label><span id="aluno-label" class="property-label"><g:message code="atividadeAluno.aluno.label" default="Aluno" /></span>:</label>
@@ -73,24 +91,6 @@
                                 
 
                                 <span class="property-value" aria-labelledby="atividadePeriodo-label"><g:link controller="atividadePeriodo" action="show" id="${atividadeAlunoInstance?.atividadePeriodo?.id}">${atividadeAlunoInstance?.atividadePeriodo?.encodeAsHTML()}</g:link></span>
-                                
-                            </div><div class="fix"></div></div>
-                    </g:if>
-                    
-                    <g:if test="${atividadeAlunoInstance?.dataEntrega}">
-                        <div class="rowElem"><label><span id="dataEntrega-label" class="property-label"><g:message code="atividadeAluno.dataEntrega.label" default="Data Entrega" /></span>:</label>
-                            <div class="formRight">
-                                
-                                <span class="property-value" aria-labelledby="dataEntrega-label"><g:formatDate date="${atividadeAlunoInstance?.dataEntrega}" /></span>
-                                
-                            </div><div class="fix"></div></div>
-                    </g:if>
-                    
-                    <g:if test="${atividadeAlunoInstance?.nota}">
-                        <div class="rowElem"><label><span id="nota-label" class="property-label"><g:message code="atividadeAluno.nota.label" default="Nota" /></span>:</label>
-                            <div class="formRight">
-                                
-                                <span class="property-value" aria-labelledby="nota-label"><g:textField readonly="readonly" name="${atividadeAlunoInstance}" value="${atividadeAlunoInstance.nota}" /></span>
                                 
                             </div><div class="fix"></div></div>
                     </g:if>

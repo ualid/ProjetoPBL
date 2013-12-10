@@ -1,7 +1,7 @@
 package sisap
 
 class Curso {
-    static mapWith="mongo"
+ //   static mapWith="mongo"
 
     String codigo
     String nome

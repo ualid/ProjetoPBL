@@ -12,27 +12,7 @@ class CursoController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        def cursoInstanceList = Curso.withCriteria() {
-            maxResults(params.max)
-            firstResult(params.offset ? params.offset.toInteger() : 0)
-            if (params.nome){
-                ilike('nome', "%$params.nome%")
-            }
-            if (params.codigo){
-                ilike('codigo', "%$params.codigo%")
-            }
-        }
-        def cursoInstanceTotal = Curso.createCriteria().count(){
-            if (params.nome){
-                ilike('nome', "%$params.nome%")
-            }
-            if (params.codigo){
-                ilike('codigo', "%$params.codigo%")
-            }
-        }
-
-
-        [cursoInstanceList: cursoInstanceList, cursoInstanceTotal: cursoInstanceTotal]
+        [cursoInstanceList: Curso.list(params), cursoInstanceTotal: Curso.count()]
     }
 
     def create() {
@@ -83,8 +63,8 @@ class CursoController {
         if (version != null) {
             if (cursoInstance.version > version) {
                 cursoInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'curso.label', default: 'Curso')] as Object[],
-                        "Another user has updated this Curso while you were editing")
+                          [message(code: 'curso.label', default: 'Curso')] as Object[],
+                          "Another user has updated this Curso while you were editing")
                 render(view: "edit", model: [cursoInstance: cursoInstance])
                 return
             }

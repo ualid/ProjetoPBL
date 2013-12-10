@@ -32,16 +32,7 @@
                         },
                         </g:each>
                     </g:if>
-                        %{--<g:elseif test="${br.edu.unime.util.Perfil.getPerfilByKey(session.perfilId) == 'Aluno'}">--}%
-                            %{--<g:each in="${Pessoa.read(session.idPessoa).disciplinas.atividadesPeriodo}" var="atividadePeriodo">--}%
-                                    %{--{--}%
-                                        %{--title: "${atividadePeriodo.atividade.nome} - ${atividadePeriodo.periodoDisciplina.disciplina.nome}",--}%
-                                        %{--start: new Date(${new SimpleDateFormat("yyyy").format(atividadePeriodo.dataCriacao)}, ${Integer.parseInt(new SimpleDateFormat("MM").format(atividadePeriodo.dataCriacao))-1}, ${new SimpleDateFormat("dd").format(atividadePeriodo.dataCriacao)}),--}%
-                                        %{--end: new Date(${new SimpleDateFormat("yyyy").format(atividadePeriodo.dataPrazo)}, ${Integer.parseInt(new SimpleDateFormat("MM").format(atividadePeriodo.dataPrazo))-1}, ${new SimpleDateFormat("dd").format(atividadePeriodo.dataPrazo)}),--}%
-                                        %{--url: "${createLink(controller: 'periodoDisciplina', action: 'show', params: [id: atividadePeriodo.periodoDisciplina.id])}"--}%
-                                    %{--},--}%
-                            %{--</g:each>--}%
-                        %{--</g:elseif>--}%
+                    
                     {
                         title: ''
 

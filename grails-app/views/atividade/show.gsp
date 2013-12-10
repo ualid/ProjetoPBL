@@ -43,11 +43,11 @@
             </div>
         </g:if>
         <div class="middleNav">
-            <g:form method="POST" >
-                <g:hiddenField name="id" value="${atividadeInstance}" />
+            <g:form name="formShow" method="POST"  action="delete">
+                <g:hiddenField name="id" value="${atividadeInstance.id}" />
                 <ul>
                     <li class="iEdit"><g:link id="${atividadeInstance.id}" action="edit"><span><g:message code="default.edit.label" args="[entityName]" /></span></g:link> </li>
-                    <li class="iDelete"><g:link  onclick="if(!(jConfirm('Tem certeza que deseja excluir este(a) ${message(code: 'atividade.label', default: 'Atividade')}?', 'Confirmação')))return false;"><span><g:message code="default.button.delete.label" args="[entityName]" /></span></g:link></li>
+                    <li class="iDelete"><a href="#" onclick="jConfirm('Tem certeza que deseja excluir este(a) ${message(code: 'atividade.label', default: 'Atividade')}?', 'Confirmação', function(e){if(e){$('form#formShow').submit();}});"><span><g:message code="default.button.delete.label" args="[entityName]" /></span></a></li>
                 </ul>
             </g:form>
         </div>
@@ -71,6 +71,72 @@
                             <div class="formRight">
                                 
                                 <span class="property-value" aria-labelledby="nome-label"><g:textField readonly="readonly" name="${atividadeInstance}" value="${atividadeInstance.nome}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${atividadeInstance?.data_inicio}">
+                        <div class="rowElem"><label><span id="data_inicio-label" class="property-label"><g:message code="atividade.data_inicio.label" default="Datainicio" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="data_inicio-label"><g:formatDate date="${atividadeInstance?.data_inicio}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${atividadeInstance?.atividade}">
+                        <div class="rowElem"><label><span id="atividade-label" class="property-label"><g:message code="atividade.atividade.label" default="Atividade" /></span>:</label>
+                            <div class="formRight">
+                                
+
+                                <span class="property-value" aria-labelledby="atividade-label"><g:link controller="atividade" action="show" id="${atividadeInstance?.atividade?.id}">${atividadeInstance?.atividade?.encodeAsHTML()}</g:link></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${atividadeInstance?.quantidade_horas}">
+                        <div class="rowElem"><label><span id="quantidade_horas-label" class="property-label"><g:message code="atividade.quantidade_horas.label" default="Quantidadehoras" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="quantidade_horas-label"><g:textField readonly="readonly" name="${atividadeInstance}" value="${atividadeInstance.quantidade_horas}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${atividadeInstance?.ativo}">
+                        <div class="rowElem"><label><span id="ativo-label" class="property-label"><g:message code="atividade.ativo.label" default="Ativo" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="ativo-label"><g:textField readonly="readonly" name="${atividadeInstance}" value="${atividadeInstance.ativo}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${atividadeInstance?.data_fim}">
+                        <div class="rowElem"><label><span id="data_fim-label" class="property-label"><g:message code="atividade.data_fim.label" default="Datafim" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="data_fim-label"><g:formatDate date="${atividadeInstance?.data_fim}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${atividadeInstance?.disciplina}">
+                        <div class="rowElem"><label><span id="disciplina-label" class="property-label"><g:message code="atividade.disciplina.label" default="Disciplina" /></span>:</label>
+                            <div class="formRight">
+                                
+
+                                <span class="property-value" aria-labelledby="disciplina-label"><g:link controller="disciplina" action="show" id="${atividadeInstance?.disciplina?.id}">${atividadeInstance?.disciplina?.encodeAsHTML()}</g:link></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${atividadeInstance?.tipoAtividade2}">
+                        <div class="rowElem"><label><span id="tipoAtividade2-label" class="property-label"><g:message code="atividade.tipoAtividade2.label" default="Tipo Atividade2" /></span>:</label>
+                            <div class="formRight">
+                                
+
+                                <span class="property-value" aria-labelledby="tipoAtividade2-label"><g:link controller="tipoAtividade" action="show" id="${atividadeInstance?.tipoAtividade2?.id}">${atividadeInstance?.tipoAtividade2?.encodeAsHTML()}</g:link></span>
                                 
                             </div><div class="fix"></div></div>
                     </g:if>

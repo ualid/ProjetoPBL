@@ -84,6 +84,18 @@
                             </div><div class="fix"></div></div>
                     </g:if>
                     
+                    <g:if test="${cursoInstance?.alunos}">
+                        <div class="rowElem"><label><span id="alunos-label" class="property-label"><g:message code="curso.alunos.label" default="Alunos" /></span>:</label>
+                            <div class="formRight">
+                                
+
+                                <g:each in="${cursoInstance.alunos}" var="a">
+                                    <span class="property-value" aria-labelledby="alunos-label"><g:link controller="pessoa" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span> <div class="fix"></div>
+                                </g:each>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
                     <div class="fix"></div>
                 </div>
             </fieldset>

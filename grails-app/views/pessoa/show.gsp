@@ -1,5 +1,5 @@
 
-<%@ page import="sisap.PeriodoDisciplina; sisap.Disciplina; br.edu.unime.util.Perfil; sisap.Pessoa" %>
+<%@ page import="sisap.Pessoa" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,331 +55,117 @@
         <div class="mainForm">
             <fieldset>
                 <div class="widget first">
-                    <div class="head"><h5 class="iList">Dados do ${pessoaInstance.perfil}</h5></div>
-                    <div class="rowElem"><label><span id="ano-label" class="property-label">Nome</span>:</label>
-                        <div class="formRight">
+                    <div class="head"><h5 class="iList">Dados do teste</h5></div>
+                    
+                    <g:if test="${pessoaInstance?.nome}">
+                        <div class="rowElem"><label><span id="nome-label" class="property-label"><g:message code="pessoa.nome.label" default="Nome" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="nome-label"><g:textField readonly="readonly" name="${pessoaInstance}" value="${pessoaInstance.nome}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${pessoaInstance?.matricula}">
+                        <div class="rowElem"><label><span id="matricula-label" class="property-label"><g:message code="pessoa.matricula.label" default="Matricula" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="matricula-label"><g:textField readonly="readonly" name="${pessoaInstance}" value="${pessoaInstance.matricula}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${pessoaInstance?.email}">
+                        <div class="rowElem"><label><span id="email-label" class="property-label"><g:message code="pessoa.email.label" default="Email" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="email-label"><g:textField readonly="readonly" name="${pessoaInstance}" value="${pessoaInstance.email}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${pessoaInstance?.cpf}">
+                        <div class="rowElem"><label><span id="cpf-label" class="property-label"><g:message code="pessoa.cpf.label" default="Cpf" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="cpf-label"><g:textField readonly="readonly" name="${pessoaInstance}" value="${pessoaInstance.cpf}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${pessoaInstance?.senha}">
+                        <div class="rowElem"><label><span id="senha-label" class="property-label"><g:message code="pessoa.senha.label" default="Senha" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="senha-label"><g:textField readonly="readonly" name="${pessoaInstance}" value="${pessoaInstance.senha}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${pessoaInstance?.perfilId}">
+                        <div class="rowElem"><label><span id="perfilId-label" class="property-label"><g:message code="pessoa.perfilId.label" default="Perfil Id" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="perfilId-label"><g:textField readonly="readonly" name="${pessoaInstance}" value="${pessoaInstance.perfilId}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${pessoaInstance?.status}">
+                        <div class="rowElem"><label><span id="status-label" class="property-label"><g:message code="pessoa.status.label" default="Status" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="status-label"><g:formatBoolean boolean="${pessoaInstance?.status}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${pessoaInstance?.curso}">
+                        <div class="rowElem"><label><span id="curso-label" class="property-label"><g:message code="pessoa.curso.label" default="Curso" /></span>:</label>
+                            <div class="formRight">
+                                
 
-                            %{--<span class="property-value" aria-labelledby="ano-label"><g:textField readonly="readonly" name="${periodoDisciplinaInstance}" value="${periodoDisciplinaInstance.ano}" /></span>--}%
-                            <h4 class="red pt10">${pessoaInstance?.nome}</h4>
-                        </div><div class="fix"></div></div>
-                    <div class="rowElem"><label><span id="ano-label" class="property-label">Matrícula</span>:</label>
-                        <div class="formRight">
+                                <span class="property-value" aria-labelledby="curso-label"><g:link controller="curso" action="show" id="${pessoaInstance?.curso?.id}">${pessoaInstance?.curso?.encodeAsHTML()}</g:link></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${pessoaInstance?.disciplinas}">
+                        <div class="rowElem"><label><span id="disciplinas-label" class="property-label"><g:message code="pessoa.disciplinas.label" default="Disciplinas" /></span>:</label>
+                            <div class="formRight">
+                                
 
-                            %{--<span class="property-value" aria-labelledby="ano-label"><g:textField readonly="readonly" name="${periodoDisciplinaInstance}" value="${periodoDisciplinaInstance.ano}" /></span>--}%
-                            <h4 class="red pt10">${pessoaInstance?.matricula}</h4>
-                        </div><div class="fix"></div></div>
-
-                    <div class="widget">
-                        <ul class="tabs">
-                            <li><a href="#tab1">Detalhes</a></li>
-                            <li><a href="#tab2">Disciplinas</a></li>
-                        </ul>
-
-                        <div class="tab_container">
-                            <div id="tab1" class="tab_content"><g:if test="${pessoaInstance?.nome}">
-                                <div class="rowElem"><label><span id="nome-label" class="property-label"><g:message code="pessoa.nome.label" default="Nome" /></span>:</label>
-                                    <div class="formRight">
-
-                                        <span class="property-value" aria-labelledby="nome-label"><h5>${pessoaInstance?.nome}</h5></span>
-
-                                    </div><div class="fix"></div></div>
-                            </g:if>
-
-                                <g:if test="${pessoaInstance?.matricula}">
-                                    <div class="rowElem"><label><span id="matricula-label" class="property-label"><g:message code="pessoa.matricula.label" default="Matricula" /></span>:</label>
-                                        <div class="formRight">
-
-                                            <span class="property-value" aria-labelledby="matricula-label"><h5>${pessoaInstance?.matricula}</h5></span>
-
-                                        </div><div class="fix"></div></div>
-                                </g:if>
-
-                                <g:if test="${pessoaInstance?.email}">
-                                    <div class="rowElem"><label><span id="email-label" class="property-label"><g:message code="pessoa.email.label" default="Email" /></span>:</label>
-                                        <div class="formRight">
-
-                                            <span class="property-value" aria-labelledby="email-label"><h5>${pessoaInstance?.email}</h5></span>
-
-                                        </div><div class="fix"></div></div>
-                                </g:if>
-
-                                <g:if test="${pessoaInstance?.cpf}">
-                                    <div class="rowElem"><label><span id="cpf-label" class="property-label"><g:message code="pessoa.cpf.label" default="Cpf" /></span>:</label>
-                                        <div class="formRight">
-
-                                            <span class="property-value" aria-labelledby="cpf-label"><h5>${pessoaInstance?.cpf}</h5></span>
-
-                                        </div><div class="fix"></div></div>
-                                </g:if>
-
-                                <g:if test="${pessoaInstance?.perfilId}">
-                                    <div class="rowElem"><label><span id="perfilId-label" class="property-label">Perfil</span>:</label>
-                                        <div class="formRight">
-
-                                            <span class="property-value" aria-labelledby="perfilId-label">
-                                                <h5>${ Perfil.getPerfilByKey(pessoaInstance.perfilId)}</h5>
-                                            </span>
-
-                                        </div><div class="fix"></div></div>
-                                </g:if>
-
-                                <g:if test="${pessoaInstance?.status}">
-                                    <div class="rowElem"><label><span id="status-label" class="property-label"><g:message code="pessoa.status.label" default="Status" /></span>:</label>
-                                        <div class="formRight">
-
-                                            <span class="property-value" aria-labelledby="status-label">
-                                                <h5><g:formatBoolean boolean="${pessoaInstance?.status}" true="Ativo" false="Inativo" /></h5>
-                                                </span>
-
-                                        </div><div class="fix"></div></div>
-                                </g:if>
-
-                                <g:if test="${pessoaInstance?.rg}">
-                                    <div class="rowElem"><label><span id="rg-label" class="property-label"><g:message code="pessoa.rg.label" default="Rg" /></span>:</label>
-                                        <div class="formRight">
-
-                                            <span class="property-value" aria-labelledby="rg-label">
-                                                <h4>${pessoaInstance?.rg}</h4>
-                                            </span>
-
-                                        </div><div class="fix"></div></div>
-                                </g:if>
-
-                                <g:if test="${pessoaInstance?.telefoneCelular}">
-                                    <div class="rowElem"><label><span id="telefoneCelular-label" class="property-label"><g:message code="pessoa.telefoneCelular.label" default="Telefone Celular" /></span>:</label>
-                                        <div class="formRight">
-
-                                            <span class="property-value" aria-labelledby="telefoneCelular-label">
-                                              <h4>  ${pessoaInstance?.telefoneCelular}</h4>
-                                            </span>
-
-                                        </div><div class="fix"></div></div>
-                                </g:if>
-                                <g:if test="${pessoaInstance?.curso}">
-                                    <div class="rowElem"><label><span id="status-label" class="property-label"><g:message code="pessoa.curso.label" default="Curso" /></span>:</label>
-                                        <div class="formRight">
-
-                                            <span class="property-value" aria-labelledby="status-label">
-                                                <h4>${pessoaInstance?.curso.nome}</h4>
-                                            </span>
-
-                                        </div><div class="fix"></div></div>
-                                </g:if>
-                                <div class="fix"></div>
-                            </div>
-                            <div id="tab2" class="tab_content">
-                                %{--<g:if test="${aulas}">--}%
-                                <div class="table">
-
-                                    <div class="head"><h5 class="iFrames">Listagem de Disciplinas: ${pessoaInstance.disciplinas.size()}</h5></div>
-                                    <table cellpadding="0" cellspacing="0" width="100%" class="tableStatic resize">
-                                        <thead class="head">
-                                        <tr>
-
-                                            <td>Disciplina</td>
-                                            <td>Professor</td>
-                                            <td>Período</td>
-
-
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            <g:each in="${pessoaInstance?.disciplinas}" var="periodoDisciplina">
-                                            <tr>
-
-                                                <td>
-                                                    <g:link controller="periodoDisciplina" action="show" id="${periodoDisciplina?.id}">
-                                                        ${periodoDisciplina?.disciplina?.nome}
-                                                    </g:link>
-
-                                                </td>
-                                                <td>    ${periodoDisciplina?.professor.nome}</td>
-                                                <td>    ${periodoDisciplina?.periodo}</td>
-
-                                            </tr>
-                                            </g:each>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            %{--</g:if>--}%
-                            </div>
-                        </div>
-                        <div class="fix"></div>
-                    </div>
-
-
+                                <g:each in="${pessoaInstance.disciplinas}" var="d">
+                                    <span class="property-value" aria-labelledby="disciplinas-label"><g:link controller="periodoDisciplina" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span> <div class="fix"></div>
+                                </g:each>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${pessoaInstance?.rg}">
+                        <div class="rowElem"><label><span id="rg-label" class="property-label"><g:message code="pessoa.rg.label" default="Rg" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="rg-label"><g:textField readonly="readonly" name="${pessoaInstance}" value="${pessoaInstance.rg}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <g:if test="${pessoaInstance?.telefoneCelular}">
+                        <div class="rowElem"><label><span id="telefoneCelular-label" class="property-label"><g:message code="pessoa.telefoneCelular.label" default="Telefone Celular" /></span>:</label>
+                            <div class="formRight">
+                                
+                                <span class="property-value" aria-labelledby="telefoneCelular-label"><g:textField readonly="readonly" name="${pessoaInstance}" value="${pessoaInstance.telefoneCelular}" /></span>
+                                
+                            </div><div class="fix"></div></div>
+                    </g:if>
+                    
+                    <div class="fix"></div>
                 </div>
             </fieldset>
         </div>
-    %{--<div class="content">--}%
-
-    %{--<div class="widget tabsRight">--}%
-        %{--<div class="head"><h5 class="iFrames">Tables with tabbed navigation</h5></div>--}%
-        %{--<ul class="tabs">--}%
-            %{--<li><a href="#tab5">Four cols</a></li>--}%
-            %{--<li><a href="#tab6">Five cols</a></li>--}%
-            %{--<li><a href="#tab7">Six cols</a></li>--}%
-        %{--</ul>--}%
-
-        %{--<div class="tab_container">--}%
-            %{--<div id="tab5" class="tab_content nopadding">--}%
-                %{--<table cellpadding="0" cellspacing="0" width="723" class="tableStatic">--}%
-                    %{--<thead>--}%
-                    %{--<tr>--}%
-                        %{--<td width="25%">Column 1</td>--}%
-                        %{--<td>Column 2</td>--}%
-                        %{--<td>Column 3</td>--}%
-                        %{--<td>Column 4</td>--}%
-                    %{--</tr>--}%
-                    %{--</thead>--}%
-                    %{--<tbody>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                    %{--</tr>--}%
-                    %{--</tbody>--}%
-                %{--</table>--}%
-            %{--</div>--}%
-            %{--<div id="tab6" class="tab_content nopadding">--}%
-                %{--<table cellpadding="0" cellspacing="0" width="723" class="tableStatic">--}%
-                    %{--<thead>--}%
-                    %{--<tr>--}%
-                        %{--<td width="25%">Column 1</td>--}%
-                        %{--<td>Column 2</td>--}%
-                        %{--<td>Column 3</td>--}%
-                        %{--<td>Column 4</td>--}%
-                        %{--<td>Column 5</td>--}%
-                    %{--</tr>--}%
-                    %{--</thead>--}%
-                    %{--<tbody>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                    %{--</tr>--}%
-                    %{--</tbody>--}%
-                %{--</table>--}%
-            %{--</div>--}%
-
-            %{--<div id="tab7" class="tab_content nopadding">--}%
-                %{--<table cellpadding="0" cellspacing="0" width="723" class="tableStatic">--}%
-                    %{--<thead>--}%
-                    %{--<tr>--}%
-                        %{--<td>Column 1</td>--}%
-                        %{--<td>Column 2</td>--}%
-                        %{--<td>Column 3</td>--}%
-                        %{--<td>Column 4</td>--}%
-                        %{--<td>Column 5</td>--}%
-                        %{--<td>Column 6</td>--}%
-                    %{--</tr>--}%
-                    %{--</thead>--}%
-                    %{--<tbody>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                        %{--<td>Row 1</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                        %{--<td>Row 2</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                        %{--<td>Row 3</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                        %{--<td>Row 4</td>--}%
-                    %{--</tr>--}%
-                    %{--<tr>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                        %{--<td>Row 5</td>--}%
-                    %{--</tr>--}%
-                    %{--</tbody>--}%
-                %{--</table>--}%
-            %{--</div>--}%
-        %{--</div>--}%
-        %{--<div class="fix"></div>--}%
-    %{--</div>--}%
     </div>
     <div class="fix"></div>
-
 </div>
 </body>
 </html>
